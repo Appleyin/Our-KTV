@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace KTV程序后台管理
@@ -30,6 +31,126 @@ namespace KTV程序后台管理
                 string path = tb.FileName; //获取路径
                 pictureBox1.Image = Image.FromFile(path); //显示选取的图片
             }
+        }
+
+        /// <summary>
+        /// 窗体加载事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FrmEditSinger_Load(object sender, EventArgs e)
+        {
+            BindSingerType();
+        }
+
+        /// <summary>
+        /// 添加歌手类型
+        /// </summary>
+        private void BindSingerType()
+        {
+            string sql = "select singertype_id,singertype_name from singer_type";
+            SqlDataAdapter adapter = new SqlDataAdapter(sql,DBHelper.Connection);
+            DataSet ds = new DataSet();
+            adapter.Fill(ds, "singer_type");
+            //添加请选择这一项
+            DataRow row = ds.Tables["singer_type"].NewRow();
+            row["singertype_id"] = -1;
+            row["singertype_name"] = "请选择";
+            ds.Tables["singer_type"].Rows.InsertAt(row,0);
+            cboType.DataSource = ds.Tables["singer_type"];
+            cboType.ValueMember = "singertype_id";
+            cboType.DisplayMember = "singertype_name";
+        }
+
+        /// <summary>
+        /// 取消按钮事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        /// <summary>
+        /// 添加事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (Textinfo())
+            {
+                AddInfo();
+            }
+            else {
+                MessageBox.Show("除歌手描述外，请输入完整信息！");
+            }
+        }
+
+        /// <summary>
+        /// 添加歌手
+        /// </summary>
+        private void AddInfo()
+        {
+            string name="";
+            int id = (int)cboType.SelectedValue;
+            if (rdbBoy.Checked)
+            {
+                 name = "男";
+            }
+            if (rdbGril.Checked)
+            {
+                name = "女";
+            }
+            if (rdbGroup.Checked)
+            {
+                name = "组合";
+            }
+            string sql =string.Format( "insert singer_info values('{0}','{1}','{2}','','{3}')",txtName.Text,id,name,txtSingerWord.Text);
+            try
+            {
+                DBHelper.OpenConnection();
+                SqlCommand cmd = new SqlCommand(sql,DBHelper.Connection);
+                int result =(int) cmd.ExecuteNonQuery();
+                if (result == 1)
+                {
+                    MessageBox.Show("添加成功！");
+                }
+                else {
+                    MessageBox.Show("添加失败！");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally {
+                DBHelper.ClosedConnection();
+            }
+
+
+        }
+
+        /// <summary>
+        /// 检查文本框是否为空
+        /// </summary>
+        /// <returns></returns>
+        private bool Textinfo()
+        {
+            bool isRight = true;
+            if (txtName.Text.Trim() == null)
+            {
+                isRight = false;
+            }
+             if (rdbBoy.Checked||rdbGril.Checked||rdbGroup.Checked)
+            {
+                isRight = true;
+            }
+             if ((int)cboType.SelectedValue==-1) {
+                isRight = false;
+            }
+            return isRight;
         }
     }
 }

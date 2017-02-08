@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace KTV程序后台管理
@@ -17,9 +18,77 @@ namespace KTV程序后台管理
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 保存事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
         {
+            if (TextInfo())
+            {
+                AddInfo();
+            }
+            else {
+                MessageBox.Show("请输入完整信息！");
+            }
+        }
 
+        /// <summary>
+        /// 添加歌曲数据
+        /// </summary>
+        private void AddInfo()
+        {
+            int sum = txtSongName.Text.Trim().Length;
+            int id = (int)cboSongType.SelectedValue;
+            string sql = string.Format("insert song_info values('{0}','{1}','{2}','{3}','1','{4}','')",txtSongName.Text,txtSongWord.Text,sum,id,txtSongTxtName.Text);
+            try
+            {
+                DBHelper.OpenConnection();
+                SqlCommand cmd = new SqlCommand(sql,DBHelper.Connection);
+                int result = (int)cmd.ExecuteNonQuery();
+                if (result == 1)
+                {
+                    MessageBox.Show("添加成功！");
+                }
+                else {
+                    MessageBox.Show("添加失败！");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally {
+                DBHelper.ClosedConnection();
+            }
+        }
+
+        /// <summary>
+        /// 检查文本框是否为空
+        /// </summary>
+        /// <returns></returns>
+        private bool TextInfo()
+        {
+            bool isRight = true;
+            foreach (Control control in Controls)
+            {
+                if (control is TextBox)
+                {
+                    if (control.Text==null)
+                    {
+                         isRight = false;
+                    }
+                }
+                if (control is ComboBox)
+                {
+                    if (control.Text=="请选择")
+                    {
+                        isRight = false;
+                    }
+                }
+            }
+            return isRight;
         }
 
         /// <summary>
@@ -34,6 +103,45 @@ namespace KTV程序后台管理
             {
                 txtSongTxtName.Text = folderBrowserDialog1.SelectedPath;//获取浏览器中的地址
             }
+        }
+
+        /// <summary>
+        /// 窗体加载事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FrmEditSong_Load(object sender, EventArgs e)
+        {
+            Bindsongtype();
+        }
+
+        /// <summary>
+        /// 展示歌曲类型
+        /// </summary>
+        private void Bindsongtype()
+        {
+            string sql = "select songtype_id,songtype_name from song_type";
+            SqlDataAdapter adapter = new SqlDataAdapter(sql, DBHelper.Connection);
+            DataSet ds = new DataSet();
+            adapter.Fill(ds, "song_type");
+            //添加请选择这一项
+            DataRow row = ds.Tables["song_type"].NewRow();
+            row["songtype_id"] = -1;
+            row["songtype_name"] = "请选择";
+            ds.Tables["song_type"].Rows.InsertAt(row, 0);
+            cboSongType.DataSource = ds.Tables["song_type"];
+            cboSongType.ValueMember = "songtype_id";
+            cboSongType.DisplayMember = "songtype_name";
+        }
+
+        /// <summary>
+        /// 取消事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCancle_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

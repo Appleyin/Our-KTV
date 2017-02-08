@@ -40,8 +40,6 @@
             this.txtSingerWord = new System.Windows.Forms.TextBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.btnWatching = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -143,43 +141,27 @@
             // 
             this.btnAdd.Location = new System.Drawing.Point(150, 366);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnAdd.Size = new System.Drawing.Size(79, 27);
             this.btnAdd.TabIndex = 5;
             this.btnAdd.Text = "添加";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnClose
             // 
             this.btnClose.Location = new System.Drawing.Point(276, 366);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 23);
+            this.btnClose.Size = new System.Drawing.Size(79, 27);
             this.btnClose.TabIndex = 5;
             this.btnClose.Text = "取消";
             this.btnClose.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(0, 0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnWatching
             // 
             this.btnWatching.Location = new System.Drawing.Point(368, 150);
             this.btnWatching.Name = "btnWatching";
-            this.btnWatching.Size = new System.Drawing.Size(75, 23);
+            this.btnWatching.Size = new System.Drawing.Size(80, 31);
             this.btnWatching.TabIndex = 8;
             this.btnWatching.Text = "浏览";
             this.btnWatching.UseVisualStyleBackColor = true;
@@ -187,10 +169,11 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Image = global::KTV程序后台管理.Properties.Resources.捕获;
             this.pictureBox1.Location = new System.Drawing.Point(358, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(119, 120);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
             // 
@@ -201,8 +184,6 @@
             this.ClientSize = new System.Drawing.Size(509, 481);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnWatching);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.txtSingerWord);
@@ -218,6 +199,7 @@
             this.Name = "FrmEditSinger";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "编辑歌手信息";
+            this.Load += new System.EventHandler(this.FrmEditSinger_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -238,8 +220,6 @@
         private System.Windows.Forms.TextBox txtSingerWord;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnWatching;
         private System.Windows.Forms.PictureBox pictureBox1;
     }
