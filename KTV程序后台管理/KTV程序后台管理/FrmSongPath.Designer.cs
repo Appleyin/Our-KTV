@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSongPath));
             this.btnExit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnLook = new System.Windows.Forms.Button();
@@ -116,6 +117,7 @@
             this.Controls.Add(this.txtPath);
             this.Controls.Add(this.lalNewPath);
             this.Controls.Add(this.lalPath);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmSongPath";
             this.Text = "设置歌曲路径";
             this.Load += new System.EventHandler(this.FrmSongPath_Load);
