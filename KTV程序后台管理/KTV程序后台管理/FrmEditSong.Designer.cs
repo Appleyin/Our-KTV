@@ -42,6 +42,7 @@
             this.btnWatching = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancle = new System.Windows.Forms.Button();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.SuspendLayout();
             // 
             // label1
@@ -129,7 +130,7 @@
             // 
             this.btnSearch.Location = new System.Drawing.Point(409, 146);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.Size = new System.Drawing.Size(83, 31);
             this.btnSearch.TabIndex = 6;
             this.btnSearch.Text = "查询";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -138,16 +139,17 @@
             // 
             this.btnWatching.Location = new System.Drawing.Point(393, 290);
             this.btnWatching.Name = "btnWatching";
-            this.btnWatching.Size = new System.Drawing.Size(75, 23);
+            this.btnWatching.Size = new System.Drawing.Size(91, 30);
             this.btnWatching.TabIndex = 7;
             this.btnWatching.Text = "浏览";
             this.btnWatching.UseVisualStyleBackColor = true;
+            this.btnWatching.Click += new System.EventHandler(this.btnWatching_Click);
             // 
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(339, 364);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Size = new System.Drawing.Size(93, 28);
             this.btnSave.TabIndex = 8;
             this.btnSave.Text = "保存";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -157,7 +159,7 @@
             // 
             this.btnCancle.Location = new System.Drawing.Point(461, 364);
             this.btnCancle.Name = "btnCancle";
-            this.btnCancle.Size = new System.Drawing.Size(75, 23);
+            this.btnCancle.Size = new System.Drawing.Size(90, 28);
             this.btnCancle.TabIndex = 9;
             this.btnCancle.Text = "取消";
             this.btnCancle.UseVisualStyleBackColor = true;
@@ -204,5 +206,6 @@
         private System.Windows.Forms.Button btnWatching;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancle;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
