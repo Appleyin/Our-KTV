@@ -62,8 +62,8 @@ namespace KTV程序后台管理
             if (!txtNewPath.Text.Trim().Equals(string.Empty))
             {
                 string newPath = txtNewPath.Text;
-                string sql = string.Format("update  dbo.resource_path set resource_path='{0}' where resource_type='Photo'",newPath);
-                SqlCommand cmd = new SqlCommand(sql,DBHelper.Connection);
+                string sql = string.Format("update  dbo.resource_path set resource_path='{0}' where resource_type='Photo'", newPath);
+                SqlCommand cmd = new SqlCommand(sql, DBHelper.Connection);
                 try
                 {
                     DBHelper.OpenConnection();
@@ -74,7 +74,7 @@ namespace KTV程序后台管理
                     }
                     else
                     {
-                        MessageBox.Show("修改失败！","温馨提示");
+                        MessageBox.Show("修改失败！", "温馨提示");
                     }
                 }
                 catch (Exception ex)
@@ -87,6 +87,10 @@ namespace KTV程序后台管理
                     DBHelper.ClosedConnection();
                 }
 
+            }
+            else
+            {
+                MessageBox.Show("不能保存空的地址，请选择地址！", "温馨提示");
             }
         }
         /// <summary>
