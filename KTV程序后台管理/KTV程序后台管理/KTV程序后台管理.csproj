@@ -92,7 +92,7 @@
     <Compile Include="FrmSingerPath.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSingerPath.designer.cs">
+    <Compile Include="FrmSingerPath.Designer.cs">
       <DependentUpon>FrmSingerPath.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmSongList.cs">

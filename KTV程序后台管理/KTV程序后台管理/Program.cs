@@ -16,7 +16,7 @@ namespace KTV程序后台管理
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmSongPath());
+            Application.Run(new FrmSingerPath());
         }
     }
 }
