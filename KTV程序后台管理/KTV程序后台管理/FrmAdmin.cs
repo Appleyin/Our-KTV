@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Data.SqlClient;
 namespace KTV程序后台管理
 {
     public partial class FrmAdmin : Form
@@ -16,5 +16,6 @@ namespace KTV程序后台管理
         {
             InitializeComponent();
         }
+       
     }
 }
