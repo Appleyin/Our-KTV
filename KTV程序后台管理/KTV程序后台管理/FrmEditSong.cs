@@ -13,6 +13,8 @@ namespace KTV程序后台管理
 {
     public partial class FrmEditSong : Form
     {
+       
+        public  int singertypeids;//歌手编号
         public FrmEditSong()
         {
             InitializeComponent();
@@ -41,7 +43,7 @@ namespace KTV程序后台管理
         {
             int sum = txtSongName.Text.Trim().Length;
             int id = (int)cboSongType.SelectedValue;
-            string sql = string.Format("insert song_info values('{0}','{1}','{2}','{3}','1','{4}','')",txtSongName.Text,txtSongWord.Text,sum,id,txtSongTxtName.Text);
+            string sql = string.Format("insert song_info values('{0}','{1}','{2}','{3}','{4}','{5}','')",txtSinger.Text,txtSongWord.Text,sum,id,singertypeids,txtSongTxtName.Text);
             try
             {
                 DBHelper.OpenConnection();
@@ -142,6 +144,21 @@ namespace KTV程序后台管理
         private void btnCancle_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        /// <summary>
+        /// 查询歌手方法
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+
+            FrmSingerList singer = new KTV程序后台管理.FrmSingerList();
+            singer.MdiParent = this;
+            singer.Show();
+            singertypeids = singer.singerytpeid;
+            txtSinger.Text = singer.singername;
         }
     }
 }
