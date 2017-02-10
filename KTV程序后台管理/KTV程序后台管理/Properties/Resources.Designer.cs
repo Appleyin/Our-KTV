@@ -63,6 +63,16 @@ namespace KTV程序后台管理.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap _20151025155034_Xn8cx {
+            get {
+                object obj = ResourceManager.GetObject("20151025155034_Xn8cx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 捕获 {
             get {
                 object obj = ResourceManager.GetObject("捕获", resourceCulture);

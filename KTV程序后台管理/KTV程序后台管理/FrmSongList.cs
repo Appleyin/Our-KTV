@@ -13,7 +13,7 @@ namespace KTV程序后台管理
 {
     public partial class FrmSongList : Form
     {
-        
+      
         public FrmSongList()
         {
             InitializeComponent();
@@ -37,10 +37,14 @@ namespace KTV程序后台管理
         /// </summary>
         private void addDataGir()
         {
-            string sql = string.Format(@"select song_name,t.songtype_name,i.song_play_count,t.songtype_id 
-                                                           from dbo.song_info i,dbo.song_type t 
-                                                           where t.songtype_id=i.songtype_id");
+            string sql = string.Format(@"select i.song_id,i.song_ab,i.singer_id,i.song_url,song_name,t.songtype_name,i.song_play_count,t.songtype_id,f.singer_name
+                                                           from dbo.song_info i,dbo.song_type t,singer_info f
+                                                           where t.songtype_id=i.songtype_id and i.singer_id=f.singer_id");
             sda = new SqlDataAdapter(sql,DBHelper.Connection);
+            if (ds.Tables["shuju"]!=null)
+            {
+                ds.Tables["shuju"].Clear();
+            }
             sda.Fill(ds,"shuju");
             dataGridView1.DataSource = ds.Tables["shuju"];
         }
@@ -88,6 +92,71 @@ namespace KTV程序后台管理
             }
         }
 
-      
+        /// <summary>
+        /// 单击快捷删除按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void 删除ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("是否删除？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                isDelete();
+            }
+        }
+
+        /// <summary>
+        /// 删除事件
+        /// </summary>
+        public void isDelete() {
+            int songid = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["Column6"].Value);
+            string sql = "delete song_info where song_id='" + songid + "'";
+            try
+            {
+                DBHelper.OpenConnection();
+                SqlCommand cmd = new SqlCommand(sql, DBHelper.Connection);
+                int result = cmd.ExecuteNonQuery();
+                if (result == 1)
+                {
+                    MessageBox.Show("删除成功！");
+                }
+                else
+                {
+                    MessageBox.Show("删除失败！");
+                }
+                addDataGir();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                DBHelper.ClosedConnection();
+            }
+        }
+
+        /// <summary>
+        /// 单击修改事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmEditSong editsong = new FrmEditSong();
+            editsong.songlist = this;
+            editsong.Show();
+            editsong.Rights = "修改";
+            editsong.txtSongName.Text = Convert.ToString(dataGridView1.SelectedRows[0].Cells["Column1"].Value);
+            editsong.txtSongWord.Text = Convert.ToString(dataGridView1.SelectedRows[0].Cells["Column4"].Value);
+            editsong.cboSongType.Text = Convert.ToString(dataGridView1.SelectedRows[0].Cells["Column2"].Value);
+            editsong.txtSinger.Text = Convert.ToString(dataGridView1.SelectedRows[0].Cells["Column8"].Value);
+            editsong.txtSongTxtName.Text = Convert.ToString(dataGridView1.SelectedRows[0].Cells["Column7"].Value);
+            editsong.songsid = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["Column6"].Value);
+            editsong.singerid = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["Column9"].Value);
+            this.Hide();
+        }
+
     }
 }

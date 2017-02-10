@@ -47,11 +47,10 @@ namespace KTV程序后台管理
                 int a = (int)cmd.ExecuteScalar();
                 if (a == 1)
                 {
-                    MessageBox.Show("登录成功！","温馨提示");
-                    
-                    FrmAdmin frm = new FrmAdmin();
-                    frm.Show();
-                    this.Hide();
+                    this.timer1.Enabled = true;
+                }
+                else {
+                    MessageBox.Show("密码或者账户错误！！");
                 }
             }
             catch (Exception ex)
@@ -94,6 +93,35 @@ namespace KTV程序后台管理
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        /// <summary>
+        /// 登陆动画
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            this.Height -= 20;
+            this.Opacity -= 0.05;
+            if (this.Opacity<=0)
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+        }
+
+        /// <summary>
+        /// 回车事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtPwd_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode==Keys.Enter)
+            {
+                Yanzheng();
+            }
         }
     }
 }

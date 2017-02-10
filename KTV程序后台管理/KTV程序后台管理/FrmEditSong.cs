@@ -13,8 +13,12 @@ namespace KTV程序后台管理
 {
     public partial class FrmEditSong : Form
     {
-       
-        public  int singertypeids;//歌手编号
+        public int singertypeids;//歌手类型编号
+        public int singerid;//歌手编号
+        public int songsid;//歌曲序号
+        public  string Rights = "新增";//判断是修改还是新增
+        public FrmSongList songlist;
+      
         public FrmEditSong()
         {
             InitializeComponent();
@@ -27,12 +31,49 @@ namespace KTV程序后台管理
         /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
         {
-            if (TextInfo())
-            {
+            if (TextInfo()&&Rights=="新增")
+            {               
                 AddInfo();
             }
-            else {
+            else if(TextInfo() && Rights == "修改")
+            {
+                ReviseInfo();
+            }
+            else
+            {
                 MessageBox.Show("请输入完整信息！");
+            }
+        }
+
+        /// <summary>
+        /// 修改信息
+        /// </summary>
+        private void ReviseInfo()
+        {
+            int sum = txtSongName.Text.Trim().Length;
+            int id = (int)cboSongType.SelectedValue;
+            string sql =string.Format(@"update song_info set song_name='{0}',song_ab='{1}',song_word_count='{2}',songtype_id='{3}',singer_id='{4}',song_url='{5}'
+                                        where song_id='{6}'",txtSongName.Text,txtSongWord.Text,sum,id, singerid, txtSongTxtName.Text, songsid);
+            try
+            {
+                DBHelper.OpenConnection();
+                SqlCommand cmd = new SqlCommand(sql,DBHelper.Connection);
+                int result = cmd.ExecuteNonQuery();
+                if (result == 1)
+                {
+                    MessageBox.Show("修改成功！");
+                    deleteinfo();
+                }
+                else {
+                    MessageBox.Show("修改失败！");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally {
+                DBHelper.ClosedConnection();
             }
         }
 
@@ -43,25 +84,31 @@ namespace KTV程序后台管理
         {
             int sum = txtSongName.Text.Trim().Length;
             int id = (int)cboSongType.SelectedValue;
-            string sql = string.Format("insert song_info values('{0}','{1}','{2}','{3}','{4}','{5}','')",txtSinger.Text,txtSongWord.Text,sum,id,singertypeids,txtSongTxtName.Text);
+           
+            string sql = string.Format("insert song_info values('{0}','{1}','{2}','{3}','{4}','{5}','')",txtSongName.Text, txtSongWord.Text, sum, id, singertypeids, txtSongTxtName.Text);
             try
             {
                 DBHelper.OpenConnection();
-                SqlCommand cmd = new SqlCommand(sql,DBHelper.Connection);
+                SqlCommand cmd = new SqlCommand(sql, DBHelper.Connection);
                 int result = (int)cmd.ExecuteNonQuery();
                 if (result == 1)
                 {
                     MessageBox.Show("添加成功！");
+                    deleteinfo();
                 }
-                else {
+
+                else
+                {
                     MessageBox.Show("添加失败！");
                 }
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            finally {
+            finally
+            {
                 DBHelper.ClosedConnection();
             }
         }
@@ -77,14 +124,14 @@ namespace KTV程序后台管理
             {
                 if (control is TextBox)
                 {
-                    if (control.Text==null)
+                    if (control.Text == null)
                     {
-                         isRight = false;
+                        isRight = false;
                     }
                 }
                 if (control is ComboBox)
                 {
-                    if (control.Text=="请选择")
+                    if (control.Text == "请选择")
                     {
                         isRight = false;
                     }
@@ -101,7 +148,7 @@ namespace KTV程序后台管理
         private void btnWatching_Click(object sender, EventArgs e)
         {
             DialogResult tb = folderBrowserDialog1.ShowDialog();//调用文件浏览器控件
-            if (tb==System.Windows.Forms.DialogResult.OK)//判断文件浏览器控件是否返回
+            if (tb == System.Windows.Forms.DialogResult.OK)//判断文件浏览器控件是否返回
             {
                 txtSongTxtName.Text = folderBrowserDialog1.SelectedPath;//获取浏览器中的地址
             }
@@ -114,6 +161,7 @@ namespace KTV程序后台管理
         /// <param name="e"></param>
         private void FrmEditSong_Load(object sender, EventArgs e)
         {
+          
             Bindsongtype();
         }
 
@@ -153,12 +201,39 @@ namespace KTV程序后台管理
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
+          
+            FrmSingerList message = new FrmSingerList();
+            message.answer = "查询";
+            message.song = this;
+            message.Show();
+        }
 
-            FrmSingerList singer = new KTV程序后台管理.FrmSingerList();
-            singer.MdiParent = this;
-            singer.Show();
-            singertypeids = singer.singerytpeid;
-            txtSinger.Text = singer.singername;
+        /// <summary>
+        /// 单击清空按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btndelete_Click(object sender, EventArgs e)
+        {
+            deleteinfo();
+        }
+
+        /// <summary>
+        /// 清空事件
+        /// </summary>
+        private void deleteinfo()
+        {
+            foreach (Control control in Controls)
+            {
+                if (control is TextBox)
+                {
+                    control.Text = "";
+                }
+                if (control is ComboBox)
+                {
+                    control.Text = "请选择";
+                }
+            }
         }
     }
 }

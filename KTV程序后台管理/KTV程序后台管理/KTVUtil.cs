@@ -8,6 +8,8 @@ namespace KTV程序后台管理
 {
     class KTVUtil
     {
+        public static string singerphotoPath = "";
+        public static string songPath = "";
 
     }
 }

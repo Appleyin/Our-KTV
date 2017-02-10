@@ -23,6 +23,7 @@ namespace KTV程序后台管理
         /// <param name="e"></param>
         private void FrmSingerPath_Load(object sender, EventArgs e)
         {
+          
             addData();
         }
         /// <summary>
@@ -30,7 +31,7 @@ namespace KTV程序后台管理
         /// </summary>
         private void addData()
         {
-            string sql = "select resource_path from dbo.resource_path where resource_type='Song'";
+            string sql = "select resource_path from resource_path where resource_type='Song'";
             SqlCommand cmd = new SqlCommand(sql, DBHelper.Connection);
             try
             {
@@ -46,6 +47,7 @@ namespace KTV程序后台管理
                 DBHelper.ClosedConnection();//关闭数据库
             }
         }
+
         /// <summary>
         /// 浏览按钮点击事件
         /// </summary>
@@ -57,6 +59,7 @@ namespace KTV程序后台管理
             if (dr == System.Windows.Forms.DialogResult.OK) //是判断文件浏览器控件是否返回ok，即用户是否确定选择
             {
                 txtNewPath.Text = folderBrowserDialog1.SelectedPath;//获取浏览器中的地址
+                KTVUtil.songPath = txtNewPath.Text;
             }
         }
         /// <summary>
@@ -69,7 +72,7 @@ namespace KTV程序后台管理
             if (!txtNewPath.Text.Trim().Equals(string.Empty))
             {
                 string newPath = txtNewPath.Text;
-                string sql = string.Format("update  dbo.resource_path set resource_path='{0}' where resource_type='Photo'", newPath);
+                string sql = string.Format("update  resource_path set resource_path='{0}' where resource_type='Song'", newPath);
                 SqlCommand cmd = new SqlCommand(sql, DBHelper.Connection);
                 try
                 {
@@ -83,6 +86,8 @@ namespace KTV程序后台管理
                     {
                         MessageBox.Show("修改失败！", "温馨提示");
                     }
+                    addData();
+                    txtNewPath.Text = "";
                 }
                 catch (Exception ex)
                 {

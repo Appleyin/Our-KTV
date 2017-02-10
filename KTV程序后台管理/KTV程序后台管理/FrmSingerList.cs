@@ -13,10 +13,11 @@ namespace KTV程序后台管理
 {
     public partial class FrmSingerList : Form
     {
-        public  int singerytpeid;//全局变量
-        public  string singername;
+        public FrmEditSong song;
+
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataSet ds = new DataSet();
+        public string answer = "";
         public FrmSingerList()
         {
             InitializeComponent();
@@ -28,12 +29,26 @@ namespace KTV程序后台管理
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void FrmSingerList_Load(object sender, EventArgs e)
-        {        
-            SingerTypeInfo();
-          
+        {
+            
+            SingerTypeInfo();      
         }
 
-       
+        /// <summary>
+        /// 传数据
+        /// </summary>
+        public void TextInfo()
+        {
+            if (answer == "查询")
+            {
+                if (dataGridView1.RowCount > 0)
+                {
+                    song.singertypeids = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["singerid"].Value);
+                    song.txtSinger.Text = Convert.ToString(dataGridView1.SelectedRows[0].Cells["SingerName"].Value);
+                }
+            }
+
+        }
 
 
         /// <summary>
@@ -62,24 +77,30 @@ namespace KTV程序后台管理
         /// <param name="e"></param>
         public void btnSearch_Click(object sender, EventArgs e)
         {
+            Info();
+        }
+
+        /// <summary>
+        /// 查询数据后绑定
+        /// </summary>
+        public void Info() {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("select singer_name,singertype_name,singer_sex,singer_word,t.singertype_id from singer_info i,singer_type t where i.singertype_id=t.singertype_id");
+            sb.AppendLine("select i.singer_id,singer_name,singertype_name,singer_sex,singer_word,siinger_photo_url from singer_info i,singer_type t where i.singertype_id=t.singertype_id");
             int id = (int)cboSingerType.SelectedValue;//获取歌手类型id
-            if (id>0)
+            if (id > 0)
             {
-                sb.AppendLine(" and i.singer_name like '%"+txtSingerName.Text+"%' and t.singertype_name='"+cboSingerType.Text+"'");
+                sb.AppendLine(" and i.singer_name like '%" + txtSingerName.Text + "%' and t.singertype_name='" + cboSingerType.Text + "'");
             }
-            SqlDataAdapter adapter = new SqlDataAdapter(sb.ToString(),DBHelper.Connection);
+            SqlDataAdapter adapter = new SqlDataAdapter(sb.ToString(), DBHelper.Connection);
             DataSet ds = new DataSet();
-           
-            if (ds.Tables["AS"]!=null)
+
+            if (ds.Tables["AS"] != null)
             {
                 ds.Tables["AS"].Clear();
             }
             adapter.Fill(ds, "AS");
             dataGridView1.DataSource = ds.Tables["AS"];
-            singerytpeid = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["singertypeid"].Value);
-            singername = Convert.ToString(dataGridView1.SelectedRows[0].Cells["SingerName"].Value);
+            TextInfo();
         }
 
         /// <summary>
@@ -89,7 +110,7 @@ namespace KTV程序后台管理
         /// <param name="e"></param>
         private void cboSingerType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cboSingerType.SelectedIndex == 0)
+            if (cboSingerType.SelectedIndex==0)
             {
                 txtSingerName.Enabled = false;
             }
@@ -98,5 +119,97 @@ namespace KTV程序后台管理
                 txtSingerName.Enabled = true;
             }
         }
+
+        /// <summary>
+        /// 赋值
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            TextInfo();
+        }
+
+        /// <summary>
+        /// 歌手修改按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void 修改ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmEditSinger editsinger = new FrmEditSinger();
+            editsinger.singerlist = this;
+            this.Hide();
+            editsinger.Show();
+            editsinger.txtName.Text = Convert.ToString(dataGridView1.SelectedRows[0].Cells["SingerName"].Value);
+            editsinger.txtSingerWord.Text = Convert.ToString(dataGridView1.SelectedRows[0].Cells["SingerWord"].Value);
+            editsinger.cboType.Text= Convert.ToString(dataGridView1.SelectedRows[0].Cells["SingerType"].Value);
+            editsinger.Sid = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["singerid"].Value);
+            editsinger.Sex= Convert.ToString(dataGridView1.SelectedRows[0].Cells["SingerSex"].Value);
+            if (editsinger.Sex == "男")
+            {
+                editsinger.rdbBoy.Checked = true;
+            }
+            else if (editsinger.Sex == "女")
+            {
+                editsinger.rdbGril.Checked = true;
+            }
+            else if(editsinger.Sex == "组合")
+            {
+                editsinger.rdbGroup.Checked = true;
+            }
+           // editsinger.pictureBox1.Image= Convert.ToString(dataGridView1.SelectedRows[0].Cells[1].Value);
+
+        }
+
+        /// <summary>
+        /// 单击歌手删除事件按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("是否删除？","提示",MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
+            if (result==DialogResult.Yes)
+            {
+                isDelete();
+            }
+        }
+
+        /// <summary>
+        /// 删除事件
+        /// </summary>
+        public void isDelete() {
+            int singerid = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["singerid"].Value);
+            string sql = "delete song_info where singer_id='" + singerid + "'";
+            try
+            {
+                DBHelper.OpenConnection();
+                SqlCommand cmd = new SqlCommand(sql, DBHelper.Connection);
+                cmd.ExecuteNonQuery();
+                //删主表数据
+                sql = "delete singer_info where singer_id='" + singerid + "'";
+                cmd.CommandText = sql;
+                int result = cmd.ExecuteNonQuery();
+                if (result == 1)
+                {
+                    MessageBox.Show("删除成功！");
+                }
+                else
+                {
+                    MessageBox.Show("删除失败！");
+                }
+                Info();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                DBHelper.ClosedConnection();
+            }
+        }
+
     }
 }

@@ -43,6 +43,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancle = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.btndelete = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -171,11 +172,22 @@
             this.btnCancle.UseVisualStyleBackColor = true;
             this.btnCancle.Click += new System.EventHandler(this.btnCancle_Click);
             // 
+            // btndelete
+            // 
+            this.btndelete.Location = new System.Drawing.Point(224, 365);
+            this.btndelete.Name = "btndelete";
+            this.btndelete.Size = new System.Drawing.Size(79, 27);
+            this.btndelete.TabIndex = 10;
+            this.btndelete.Text = "清空";
+            this.btndelete.UseVisualStyleBackColor = true;
+            this.btndelete.Click += new System.EventHandler(this.btndelete_Click);
+            // 
             // FrmEditSong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(654, 481);
+            this.Controls.Add(this.btndelete);
             this.Controls.Add(this.btnCancle);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnWatching);
@@ -190,7 +202,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.IsMdiContainer = true;
             this.Name = "FrmEditSong";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "编辑歌曲信息";
@@ -207,15 +218,16 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtSongName;
-        private System.Windows.Forms.TextBox txtSongWord;
-        private System.Windows.Forms.TextBox txtSinger;
-        private System.Windows.Forms.TextBox txtSongTxtName;
-        private System.Windows.Forms.ComboBox cboSongType;
+        public  System.Windows.Forms.TextBox txtSongName;
+        public System.Windows.Forms.TextBox txtSongWord;
+        public System.Windows.Forms.TextBox txtSinger;
+        public System.Windows.Forms.TextBox txtSongTxtName;
+        public System.Windows.Forms.ComboBox cboSongType;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnWatching;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancle;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Button btndelete;
     }
 }

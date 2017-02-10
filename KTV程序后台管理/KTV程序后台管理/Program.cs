@@ -16,7 +16,12 @@ namespace KTV程序后台管理
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmEditSong());
+            FrmLogin login = new FrmLogin();
+
+            if (login.ShowDialog()==DialogResult.OK)
+            {
+                Application.Run(new FrmAdmin()); 
+            }
         }
     }
 }

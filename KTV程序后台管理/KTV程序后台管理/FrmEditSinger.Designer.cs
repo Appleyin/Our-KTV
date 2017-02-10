@@ -41,6 +41,7 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnWatching = new System.Windows.Forms.Button();
+            this.btndelete = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -95,7 +96,6 @@
             this.rdbBoy.Name = "rdbBoy";
             this.rdbBoy.Size = new System.Drawing.Size(43, 19);
             this.rdbBoy.TabIndex = 2;
-            this.rdbBoy.TabStop = true;
             this.rdbBoy.Text = "男";
             this.rdbBoy.UseVisualStyleBackColor = true;
             // 
@@ -106,7 +106,6 @@
             this.rdbGril.Name = "rdbGril";
             this.rdbGril.Size = new System.Drawing.Size(43, 19);
             this.rdbGril.TabIndex = 2;
-            this.rdbGril.TabStop = true;
             this.rdbGril.Text = "女";
             this.rdbGril.UseVisualStyleBackColor = true;
             // 
@@ -117,7 +116,6 @@
             this.rdbGroup.Name = "rdbGroup";
             this.rdbGroup.Size = new System.Drawing.Size(58, 19);
             this.rdbGroup.TabIndex = 2;
-            this.rdbGroup.TabStop = true;
             this.rdbGroup.Text = "组合";
             this.rdbGroup.UseVisualStyleBackColor = true;
             // 
@@ -139,7 +137,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(150, 366);
+            this.btnAdd.Location = new System.Drawing.Point(211, 366);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(79, 27);
             this.btnAdd.TabIndex = 5;
@@ -149,7 +147,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(276, 366);
+            this.btnClose.Location = new System.Drawing.Point(320, 366);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(79, 27);
             this.btnClose.TabIndex = 5;
@@ -167,12 +165,22 @@
             this.btnWatching.UseVisualStyleBackColor = true;
             this.btnWatching.Click += new System.EventHandler(this.btnWatching_Click);
             // 
+            // btndelete
+            // 
+            this.btndelete.Location = new System.Drawing.Point(87, 366);
+            this.btndelete.Name = "btndelete";
+            this.btndelete.Size = new System.Drawing.Size(79, 27);
+            this.btndelete.TabIndex = 10;
+            this.btndelete.Text = "清空";
+            this.btndelete.UseVisualStyleBackColor = true;
+            this.btndelete.Click += new System.EventHandler(this.btndelete_Click);
+            // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::KTV程序后台管理.Properties.Resources.捕获;
-            this.pictureBox1.Location = new System.Drawing.Point(358, 12);
+            this.pictureBox1.Image = global::KTV程序后台管理.Properties.Resources._20151025155034_Xn8cx;
+            this.pictureBox1.Location = new System.Drawing.Point(368, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(119, 120);
+            this.pictureBox1.Size = new System.Drawing.Size(102, 120);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
@@ -182,6 +190,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(509, 481);
+            this.Controls.Add(this.btndelete);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnWatching);
             this.Controls.Add(this.btnClose);
@@ -212,15 +221,16 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.RadioButton rdbBoy;
-        private System.Windows.Forms.RadioButton rdbGril;
-        private System.Windows.Forms.RadioButton rdbGroup;
-        private System.Windows.Forms.ComboBox cboType;
-        private System.Windows.Forms.TextBox txtSingerWord;
+        public  System.Windows.Forms.TextBox txtName;
+        public System.Windows.Forms.RadioButton rdbBoy;
+        public System.Windows.Forms.RadioButton rdbGril;
+        public System.Windows.Forms.RadioButton rdbGroup;
+        public System.Windows.Forms.ComboBox cboType;
+        public System.Windows.Forms.TextBox txtSingerWord;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnWatching;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        public System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btndelete;
     }
 }
