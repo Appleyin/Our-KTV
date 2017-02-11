@@ -160,7 +160,8 @@ namespace KTV程序后台管理
                 editsinger.rdbGroup.Checked = true;
             }       
             //把图片传过去
-            editsinger.pictureBox1.ImageLocation = Convert.ToString(dataGridView1.SelectedRows[0].Cells["Column1"].Value);
+            editsinger.pictureBox1.ImageLocation = Convert.ToString(KTVUtil.singerphotoPath+dataGridView1.SelectedRows[0].Cells["Column1"].Value);           
+            editsinger.txtPaths.Text= Convert.ToString(KTVUtil.singerphotoPath+dataGridView1.SelectedRows[0].Cells["Column1"].Value);
         }
 
         /// <summary>

@@ -43,6 +43,8 @@
             this.btnWatching = new System.Windows.Forms.Button();
             this.btndelete = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtPaths = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,7 +78,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(24, 213);
+            this.label4.Location = new System.Drawing.Point(24, 242);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(82, 15);
             this.label4.TabIndex = 0;
@@ -84,7 +86,7 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(112, 46);
+            this.txtName.Location = new System.Drawing.Point(123, 46);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(121, 25);
             this.txtName.TabIndex = 1;
@@ -121,6 +123,7 @@
             // 
             // cboType
             // 
+            this.cboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboType.FormattingEnabled = true;
             this.cboType.Location = new System.Drawing.Point(123, 158);
             this.cboType.Name = "cboType";
@@ -129,7 +132,7 @@
             // 
             // txtSingerWord
             // 
-            this.txtSingerWord.Location = new System.Drawing.Point(123, 213);
+            this.txtSingerWord.Location = new System.Drawing.Point(123, 242);
             this.txtSingerWord.Multiline = true;
             this.txtSingerWord.Name = "txtSingerWord";
             this.txtSingerWord.Size = new System.Drawing.Size(238, 128);
@@ -137,7 +140,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(211, 366);
+            this.btnAdd.Location = new System.Drawing.Point(211, 396);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(79, 27);
             this.btnAdd.TabIndex = 5;
@@ -147,7 +150,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(320, 366);
+            this.btnClose.Location = new System.Drawing.Point(349, 396);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(79, 27);
             this.btnClose.TabIndex = 5;
@@ -167,7 +170,7 @@
             // 
             // btndelete
             // 
-            this.btndelete.Location = new System.Drawing.Point(87, 366);
+            this.btndelete.Location = new System.Drawing.Point(87, 396);
             this.btndelete.Name = "btndelete";
             this.btndelete.Size = new System.Drawing.Size(79, 27);
             this.btndelete.TabIndex = 10;
@@ -185,11 +188,30 @@
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(24, 204);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(82, 15);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "图片路径：";
+            // 
+            // txtPaths
+            // 
+            this.txtPaths.Location = new System.Drawing.Point(123, 201);
+            this.txtPaths.Name = "txtPaths";
+            this.txtPaths.ReadOnly = true;
+            this.txtPaths.Size = new System.Drawing.Size(261, 25);
+            this.txtPaths.TabIndex = 12;
+            // 
             // FrmEditSinger
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(509, 481);
+            this.Controls.Add(this.txtPaths);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.btndelete);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnWatching);
@@ -232,5 +254,7 @@
         private System.Windows.Forms.Button btnWatching;
         public System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btndelete;
+        private System.Windows.Forms.Label label5;
+        public  System.Windows.Forms.TextBox txtPaths;
     }
 }

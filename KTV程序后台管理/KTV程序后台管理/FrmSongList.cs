@@ -148,11 +148,12 @@ namespace KTV程序后台管理
             editsong.songlist = this;
             editsong.Show();
             editsong.Rights = "修改";
+            //依次把歌曲名字、拼音缩写、歌曲类型、歌手、文件路径、歌曲id、歌手id传值
             editsong.txtSongName.Text = Convert.ToString(dataGridView1.SelectedRows[0].Cells["Column1"].Value);
             editsong.txtSongWord.Text = Convert.ToString(dataGridView1.SelectedRows[0].Cells["Column4"].Value);
             editsong.cboSongType.Text = Convert.ToString(dataGridView1.SelectedRows[0].Cells["Column2"].Value);
             editsong.txtSinger.Text = Convert.ToString(dataGridView1.SelectedRows[0].Cells["Column8"].Value);
-            editsong.txtSongTxtName.Text = Convert.ToString(dataGridView1.SelectedRows[0].Cells["Column7"].Value);
+            editsong.txtSongTxtName.Text = Convert.ToString(KTVUtil.songPath+dataGridView1.SelectedRows[0].Cells["Column7"].Value);
             editsong.songsid = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["Column6"].Value);
             editsong.singerid = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["Column9"].Value);
             this.Hide();

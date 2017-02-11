@@ -42,7 +42,6 @@
             this.btnWatching = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancle = new System.Windows.Forms.Button();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.btndelete = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -126,6 +125,7 @@
             // 
             // cboSongType
             // 
+            this.cboSongType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSongType.FormattingEnabled = true;
             this.cboSongType.Location = new System.Drawing.Point(151, 108);
             this.cboSongType.Name = "cboSongType";
@@ -227,7 +227,6 @@
         private System.Windows.Forms.Button btnWatching;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancle;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Button btndelete;
     }
 }

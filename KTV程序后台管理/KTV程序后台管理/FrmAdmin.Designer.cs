@@ -33,6 +33,7 @@
             this.歌手管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.新增歌手ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.查询歌手ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.歌曲管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.新增歌曲ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,7 +42,6 @@
             this.设置歌手照片路径ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设置歌曲路径ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,7 +55,7 @@
             this.帮助ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(803, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1244, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -84,11 +84,17 @@
             this.查询歌手ToolStripMenuItem.Text = "查询歌手";
             this.查询歌手ToolStripMenuItem.Click += new System.EventHandler(this.查询歌手ToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(178, 6);
+            // 
             // 退出ToolStripMenuItem
             // 
             this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
             this.退出ToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.退出ToolStripMenuItem.Text = "退出";
+            this.退出ToolStripMenuItem.Click += new System.EventHandler(this.退出ToolStripMenuItem_Click);
             // 
             // 歌曲管理ToolStripMenuItem
             // 
@@ -143,16 +149,11 @@
             this.帮助ToolStripMenuItem.Text = "帮助";
             this.帮助ToolStripMenuItem.Click += new System.EventHandler(this.帮助ToolStripMenuItem_Click);
             // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(178, 6);
-            // 
             // FrmAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(803, 481);
+            this.ClientSize = new System.Drawing.Size(1244, 696);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.IO;
 using System.Windows.Forms;
 
 namespace KTV程序后台管理
@@ -52,8 +53,9 @@ namespace KTV程序后台管理
         {
             int sum = txtSongName.Text.Trim().Length;
             int id = (int)cboSongType.SelectedValue;
+            string paths = txtSongTxtName.Text.Substring(txtSongTxtName.Text.LastIndexOf("\\") + 1);//取文件后缀名
             string sql =string.Format(@"update song_info set song_name='{0}',song_ab='{1}',song_word_count='{2}',songtype_id='{3}',singer_id='{4}',song_url='{5}'
-                                        where song_id='{6}'",txtSongName.Text,txtSongWord.Text,sum,id, singerid, txtSongTxtName.Text, songsid);
+                                        where song_id='{6}'",txtSongName.Text,txtSongWord.Text,sum,id, singerid,paths, songsid);
             try
             {
                 DBHelper.OpenConnection();
@@ -62,6 +64,7 @@ namespace KTV程序后台管理
                 if (result == 1)
                 {
                     MessageBox.Show("修改成功！");
+                   // File.Copy(txtSongTxtName.Text,KTVUtil.songPath + paths);
                     deleteinfo();
                 }
                 else {
@@ -84,8 +87,8 @@ namespace KTV程序后台管理
         {
             int sum = txtSongName.Text.Trim().Length;
             int id = (int)cboSongType.SelectedValue;
-           
-            string sql = string.Format("insert song_info values('{0}','{1}','{2}','{3}','{4}','{5}','')",txtSongName.Text, txtSongWord.Text, sum, id, singertypeids, txtSongTxtName.Text);
+            string paths = txtSongTxtName.Text.Substring(txtSongTxtName.Text.LastIndexOf("\\") + 1);//取文件后缀名
+            string sql = string.Format("insert song_info values('{0}','{1}','{2}','{3}','{4}','{5}','')",txtSongName.Text, txtSongWord.Text, sum, id, singertypeids,paths);
             try
             {
                 DBHelper.OpenConnection();
@@ -94,6 +97,7 @@ namespace KTV程序后台管理
                 if (result == 1)
                 {
                     MessageBox.Show("添加成功！");
+                    File.Copy(txtSongTxtName.Text, KTVUtil.songPath + paths);
                     deleteinfo();
                 }
 
@@ -147,10 +151,11 @@ namespace KTV程序后台管理
         /// <param name="e"></param>
         private void btnWatching_Click(object sender, EventArgs e)
         {
-            DialogResult tb = folderBrowserDialog1.ShowDialog();//调用文件浏览器控件
-            if (tb == System.Windows.Forms.DialogResult.OK)//判断文件浏览器控件是否返回
+
+            OpenFileDialog tb = new OpenFileDialog();
+            if (tb.ShowDialog() == DialogResult.OK) //打开浏览器
             {
-                txtSongTxtName.Text = folderBrowserDialog1.SelectedPath;//获取浏览器中的地址
+                txtSongTxtName.Text = tb.FileName; //获取路径              
             }
         }
 

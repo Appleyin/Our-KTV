@@ -66,5 +66,19 @@ namespace KTV程序后台管理
             about.MdiParent = this;
             about.Show();
         }
+
+        /// <summary>
+        /// 退出按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("是否退出？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
     }
 }

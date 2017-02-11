@@ -160,6 +160,9 @@
   <ItemGroup>
     <None Include="Resources\20151025155034_Xn8cx.jpeg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cache_-394c317006155de8..jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -34,16 +34,16 @@
             this.txtSingerName = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cboSingerType = new System.Windows.Forms.ComboBox();
             this.SingerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SingerType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.singerid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SingerSex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SingerWord = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cboSingerType = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -103,38 +103,6 @@
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.修改ToolStripMenuItem,
-            this.删除ToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(115, 56);
-            // 
-            // 修改ToolStripMenuItem
-            // 
-            this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
-            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(114, 26);
-            this.修改ToolStripMenuItem.Text = "修改";
-            this.修改ToolStripMenuItem.Click += new System.EventHandler(this.修改ToolStripMenuItem_Click);
-            // 
-            // 删除ToolStripMenuItem
-            // 
-            this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(114, 26);
-            this.删除ToolStripMenuItem.Text = "删除";
-            this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
-            // 
-            // cboSingerType
-            // 
-            this.cboSingerType.FormattingEnabled = true;
-            this.cboSingerType.Location = new System.Drawing.Point(333, 30);
-            this.cboSingerType.Name = "cboSingerType";
-            this.cboSingerType.Size = new System.Drawing.Size(121, 23);
-            this.cboSingerType.TabIndex = 5;
-            this.cboSingerType.SelectedIndexChanged += new System.EventHandler(this.cboSingerType_SelectedIndexChanged);
-            // 
             // SingerName
             // 
             this.SingerName.DataPropertyName = "singer_name";
@@ -172,6 +140,39 @@
             this.SingerWord.DataPropertyName = "singer_word";
             this.SingerWord.HeaderText = "歌手描述";
             this.SingerWord.Name = "SingerWord";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.修改ToolStripMenuItem,
+            this.删除ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(115, 56);
+            // 
+            // 修改ToolStripMenuItem
+            // 
+            this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
+            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(114, 26);
+            this.修改ToolStripMenuItem.Text = "修改";
+            this.修改ToolStripMenuItem.Click += new System.EventHandler(this.修改ToolStripMenuItem_Click);
+            // 
+            // 删除ToolStripMenuItem
+            // 
+            this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(114, 26);
+            this.删除ToolStripMenuItem.Text = "删除";
+            this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
+            // 
+            // cboSingerType
+            // 
+            this.cboSingerType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboSingerType.FormattingEnabled = true;
+            this.cboSingerType.Location = new System.Drawing.Point(333, 30);
+            this.cboSingerType.Name = "cboSingerType";
+            this.cboSingerType.Size = new System.Drawing.Size(121, 23);
+            this.cboSingerType.TabIndex = 5;
+            this.cboSingerType.SelectedIndexChanged += new System.EventHandler(this.cboSingerType_SelectedIndexChanged);
             // 
             // FrmSingerList
             // 

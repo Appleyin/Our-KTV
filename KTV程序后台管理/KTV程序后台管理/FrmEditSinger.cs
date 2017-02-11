@@ -7,13 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.IO;
 using System.Windows.Forms;
 
 namespace KTV程序后台管理
 {
     public partial class FrmEditSinger : Form
     {
-        public string path="";//歌手照片路径
+       
         public string answer = "新增";//判断是新增歌手还是修改歌手
         public FrmSingerList singerlist;
         public string Sex="";//接受性别
@@ -32,11 +33,11 @@ namespace KTV程序后台管理
         private void btnWatching_Click(object sender, EventArgs e)
         {
             OpenFileDialog tb = new OpenFileDialog();
+            tb.Filter = "图片文件|*.bmg;*.jpg;*.gif;*.png";
             if (tb.ShowDialog()==DialogResult.OK) //打开浏览器
             {
-                 path = tb.FileName; //获取路径
-                KTVUtil.singerphotoPath = path;//将路径传给KTVUtil辅助类
-                pictureBox1.Image = Image.FromFile(path); //显示选取的图片
+                  txtPaths.Text = tb.FileName; //获取总路径
+                  pictureBox1.Image = Image.FromFile(txtPaths.Text); //显示选取的图片
             }
         }
 
@@ -117,6 +118,7 @@ namespace KTV程序后台管理
         private void reviseInfo()
         {
             string name = "";
+            string paths = txtPaths.Text.Substring(txtPaths.Text.LastIndexOf("\\")+1);//取文件后缀名
             int id = (int)cboType.SelectedValue;//获取歌手类型编号
             if (rdbBoy.Checked)
             {
@@ -131,7 +133,7 @@ namespace KTV程序后台管理
                 name = "组合";
             }
             string sql =string.Format(@"update singer_info set singer_name='{0}',singer_sex='{1}',singer_word='{2}',siinger_photo_url='{3}',singertype_id='{4}'
-                                         where singer_id='{5}'", txtName.Text,name,txtSingerWord.Text,path,id,Sid);
+                                         where singer_id='{5}'", txtName.Text,name,txtSingerWord.Text,paths,id,Sid);
             try
             {
                 DBHelper.OpenConnection();
@@ -139,6 +141,7 @@ namespace KTV程序后台管理
                 int result=cmd.ExecuteNonQuery();
                 if (result == 1)
                 {
+                   // File.Copy(txtPaths.Text,KTVUtil.singerphotoPath+paths);
                     MessageBox.Show("修改成功！");
                     DeleteInfo();
                 }
@@ -161,7 +164,8 @@ namespace KTV程序后台管理
         private void AddInfo()
         {
             string name="";
-            int id = (int)cboType.SelectedValue;
+            int id = (int)cboType.SelectedValue;//获取歌手类型id
+            string paths = txtPaths.Text.Substring(txtPaths.Text.LastIndexOf("\\") + 1);//取文件名
             if (rdbBoy.Checked)
             {
                  name = "男";
@@ -174,7 +178,7 @@ namespace KTV程序后台管理
             {
                 name = "组合";
             }
-            string sql =string.Format( "insert singer_info values('{0}','{1}','{2}','{3}','{4}')",txtName.Text,id,name,path,txtSingerWord.Text);
+            string sql =string.Format( "insert singer_info values('{0}','{1}','{2}','{3}','{4}')",txtName.Text,id,name,paths,txtSingerWord.Text);
             try
             {
                 DBHelper.OpenConnection();
@@ -183,6 +187,7 @@ namespace KTV程序后台管理
                 if (result == 1)
                 {
                     MessageBox.Show("添加成功！");
+                    File.Copy(txtPaths.Text, KTVUtil.singerphotoPath + paths);
                     DeleteInfo();
                 }
                 else {

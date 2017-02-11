@@ -27,7 +27,7 @@ namespace KTV程序后台管理
             if (dr == System.Windows.Forms.DialogResult.OK) //是判断文件浏览器控件是否返回ok，即用户是否确定选择
             {
                 txtNewPath.Text = folderBrowserDialog1.SelectedPath;//获取浏览器中的地址
-                KTVUtil.singerphotoPath = txtNewPath.Text;
+               
             }
         }
         /// <summary>
@@ -37,6 +37,7 @@ namespace KTV程序后台管理
         /// <param name="e"></param>
         private void FrmPhotoPath_Load(object sender, EventArgs e)
         {
+           
             ShowInfo();
         }
 
@@ -71,7 +72,6 @@ namespace KTV程序后台管理
             if (!txtNewPath.Text.Trim().Equals(string.Empty))
             {
                 string newPath = txtNewPath.Text;
-                KTVUtil.singerphotoPath = txtNewPath.Text;
                 string sql = string.Format("update  resource_path set resource_path='{0}' where resource_type='SingerPhoto'", newPath);
                 SqlCommand cmd = new SqlCommand(sql, DBHelper.Connection);
                 try
@@ -80,6 +80,7 @@ namespace KTV程序后台管理
                     int a = cmd.ExecuteNonQuery();
                     if (a == 1)
                     {
+                        KTVUtil.singerphotoPath = txtNewPath.Text;
                         MessageBox.Show("修改成功！", "温馨提示");
                     }
                     else
