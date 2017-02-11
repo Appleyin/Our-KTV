@@ -30,7 +30,7 @@ namespace KTV程序后台管理
         /// <param name="e"></param>
         private void FrmSingerList_Load(object sender, EventArgs e)
         {
-            
+          
             SingerTypeInfo();      
         }
 
@@ -47,7 +47,6 @@ namespace KTV程序后台管理
                     song.txtSinger.Text = Convert.ToString(dataGridView1.SelectedRows[0].Cells["SingerName"].Value);
                 }
             }
-
         }
 
 
@@ -81,7 +80,7 @@ namespace KTV程序后台管理
         }
 
         /// <summary>
-        /// 查询数据后绑定
+        /// 查询数据后绑定dataGridView1
         /// </summary>
         public void Info() {
             StringBuilder sb = new StringBuilder();
@@ -141,6 +140,8 @@ namespace KTV程序后台管理
             editsinger.singerlist = this;
             this.Hide();
             editsinger.Show();
+            editsinger.answer = "修改";
+            //依次把名字、歌手描述、类型、歌手编号、性别传过去
             editsinger.txtName.Text = Convert.ToString(dataGridView1.SelectedRows[0].Cells["SingerName"].Value);
             editsinger.txtSingerWord.Text = Convert.ToString(dataGridView1.SelectedRows[0].Cells["SingerWord"].Value);
             editsinger.cboType.Text= Convert.ToString(dataGridView1.SelectedRows[0].Cells["SingerType"].Value);
@@ -157,9 +158,9 @@ namespace KTV程序后台管理
             else if(editsinger.Sex == "组合")
             {
                 editsinger.rdbGroup.Checked = true;
-            }
-           // editsinger.pictureBox1.Image= Convert.ToString(dataGridView1.SelectedRows[0].Cells[1].Value);
-
+            }       
+            //把图片传过去
+            editsinger.pictureBox1.ImageLocation = Convert.ToString(dataGridView1.SelectedRows[0].Cells["Column1"].Value);
         }
 
         /// <summary>

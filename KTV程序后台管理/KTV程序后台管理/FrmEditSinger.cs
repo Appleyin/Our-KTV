@@ -63,7 +63,7 @@ namespace KTV程序后台管理
         }
 
         /// <summary>
-        /// 添加歌手类型
+        /// 添加歌手类型到ComboBox
         /// </summary>
         private void BindSingerType()
         {
@@ -71,7 +71,7 @@ namespace KTV程序后台管理
             SqlDataAdapter adapter = new SqlDataAdapter(sql,DBHelper.Connection);
             DataSet ds = new DataSet();
             adapter.Fill(ds, "singer_type");
-            //添加请选择这一项
+            //添加“请选择”这一项
             DataRow row = ds.Tables["singer_type"].NewRow();
             row["singertype_id"] = -1;
             row["singertype_name"] = "请选择";
@@ -117,7 +117,7 @@ namespace KTV程序后台管理
         private void reviseInfo()
         {
             string name = "";
-            int id = (int)cboType.SelectedValue;
+            int id = (int)cboType.SelectedValue;//获取歌手类型编号
             if (rdbBoy.Checked)
             {
                 name = "男";
@@ -130,7 +130,7 @@ namespace KTV程序后台管理
             {
                 name = "组合";
             }
-            string sql =string.Format(@"update singer_info set singer_name='{0}',singer_sex='{1}',singer_word='{2}',siinger_photo_url='{3},singertype_id='{4}''
+            string sql =string.Format(@"update singer_info set singer_name='{0}',singer_sex='{1}',singer_word='{2}',siinger_photo_url='{3}',singertype_id='{4}'
                                          where singer_id='{5}'", txtName.Text,name,txtSingerWord.Text,path,id,Sid);
             try
             {
