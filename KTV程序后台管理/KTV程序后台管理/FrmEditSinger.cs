@@ -187,7 +187,7 @@ namespace KTV程序后台管理
                 if (result == 1)
                 {
                     MessageBox.Show("添加成功！");
-                    File.Copy(txtPaths.Text, KTVUtil.singerphotoPath + paths);
+                   // File.Copy(txtPaths.Text, KTVUtil.singerphotoPath + paths);
                     DeleteInfo();
                 }
                 else {

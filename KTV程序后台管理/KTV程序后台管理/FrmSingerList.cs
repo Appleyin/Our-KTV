@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -14,7 +15,6 @@ namespace KTV程序后台管理
     public partial class FrmSingerList : Form
     {
         public FrmEditSong song;
-
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataSet ds = new DataSet();
         public string answer = "";
@@ -49,6 +49,9 @@ namespace KTV程序后台管理
             }
         }
 
+        /// <summary>
+        /// 获取歌手图片在数据库存的路径方法
+        /// </summary>
 
         /// <summary>
         /// 歌手类型添加
@@ -158,10 +161,29 @@ namespace KTV程序后台管理
             else if(editsinger.Sex == "组合")
             {
                 editsinger.rdbGroup.Checked = true;
-            }       
-            //把图片传过去
-            editsinger.pictureBox1.ImageLocation = Convert.ToString(KTVUtil.singerphotoPath+dataGridView1.SelectedRows[0].Cells["Column1"].Value);           
-            editsinger.txtPaths.Text= Convert.ToString(KTVUtil.singerphotoPath+dataGridView1.SelectedRows[0].Cells["Column1"].Value);
+            }
+
+            /// <summary>
+            /// 获取歌手图片在数据库存的路径方法
+            /// </summary>
+            string Paths ="";
+            string sql = "select resource_path from resource_path where resource_type='SingerPhoto'";
+            SqlCommand cmd = new SqlCommand(sql, DBHelper.Connection);
+            try
+            {
+                DBHelper.OpenConnection();//打开数据库
+                 Paths = cmd.ExecuteScalar().ToString();//获取数据信息转换为string类型
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                DBHelper.ClosedConnection();//关闭数据库
+            }
+            editsinger.pictureBox1.ImageLocation = Paths + @"\"+Convert.ToString(dataGridView1.SelectedRows[0].Cells["Column1"].Value);           
+            editsinger.txtPaths.Text=Paths+@"\"+Convert.ToString(dataGridView1.SelectedRows[0].Cells["Column1"].Value);
         }
 
         /// <summary>

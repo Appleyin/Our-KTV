@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.IO;
+
 namespace KTV程序后台管理
 {
     public partial class FrmPhotoPath : Form
@@ -71,6 +73,7 @@ namespace KTV程序后台管理
         {
             if (!txtNewPath.Text.Trim().Equals(string.Empty))
             {
+               // Directory.Move();
                 string newPath = txtNewPath.Text;
                 string sql = string.Format("update  resource_path set resource_path='{0}' where resource_type='SingerPhoto'", newPath);
                 SqlCommand cmd = new SqlCommand(sql, DBHelper.Connection);
@@ -80,7 +83,8 @@ namespace KTV程序后台管理
                     int a = cmd.ExecuteNonQuery();
                     if (a == 1)
                     {
-                        KTVUtil.singerphotoPath = txtNewPath.Text;
+                        Directory.Move(txtPath.Text,txtNewPath.Text);
+                        KTVUtil.singerphotoPath = newPath;
                         MessageBox.Show("修改成功！", "温馨提示");
                     }
                     else

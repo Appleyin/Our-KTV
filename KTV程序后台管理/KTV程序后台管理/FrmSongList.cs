@@ -153,7 +153,26 @@ namespace KTV程序后台管理
             editsong.txtSongWord.Text = Convert.ToString(dataGridView1.SelectedRows[0].Cells["Column4"].Value);
             editsong.cboSongType.Text = Convert.ToString(dataGridView1.SelectedRows[0].Cells["Column2"].Value);
             editsong.txtSinger.Text = Convert.ToString(dataGridView1.SelectedRows[0].Cells["Column8"].Value);
-            editsong.txtSongTxtName.Text = Convert.ToString(KTVUtil.songPath+dataGridView1.SelectedRows[0].Cells["Column7"].Value);
+            /// <summary>
+            /// 获取歌曲在数据库存的路径方法
+            /// </summary>
+            string Paths = "";
+            string sql = "select resource_path from resource_path where resource_type='Song'";
+            SqlCommand cmd = new SqlCommand(sql, DBHelper.Connection);
+            try
+            {
+                DBHelper.OpenConnection();//打开数据库
+                Paths = cmd.ExecuteScalar().ToString();//获取数据信息转换为string类型
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                DBHelper.ClosedConnection();//关闭数据库
+            }
+            editsong.txtSongTxtName.Text =Paths+@"\"+ Convert.ToString(dataGridView1.SelectedRows[0].Cells["Column7"].Value);
             editsong.songsid = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["Column6"].Value);
             editsong.singerid = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["Column9"].Value);
             this.Hide();

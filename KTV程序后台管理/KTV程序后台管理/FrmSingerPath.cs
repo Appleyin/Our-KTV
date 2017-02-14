@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 using System.Data.SqlClient;
 namespace KTV程序后台管理
 {
@@ -59,7 +60,6 @@ namespace KTV程序后台管理
             if (dr == System.Windows.Forms.DialogResult.OK) //是判断文件浏览器控件是否返回ok，即用户是否确定选择
             {
                 txtNewPath.Text = folderBrowserDialog1.SelectedPath;//获取浏览器中的地址
-               // KTVUtil.songPath = txtNewPath.Text;
             }
         }
         /// <summary>
@@ -80,6 +80,8 @@ namespace KTV程序后台管理
                     int a = cmd.ExecuteNonQuery();
                     if (a == 1)
                     {
+                        Directory.Move(txtPath.Text,txtNewPath.Text);//移动文件里的内容到另一个文件
+                        KTVUtil.singerphotoPath = txtNewPath.Text;
                         MessageBox.Show("修改成功！", "温馨提示");
                     }
                     else

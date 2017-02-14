@@ -85,8 +85,8 @@ namespace KTV程序后台管理
         /// </summary>
         private void AddInfo()
         {
-            int sum = txtSongName.Text.Trim().Length;
-            int id = (int)cboSongType.SelectedValue;
+            int sum = txtSongName.Text.Trim().Length;//获取歌曲名字长度
+            int id = (int)cboSongType.SelectedValue;//获取歌曲类型id
             string paths = txtSongTxtName.Text.Substring(txtSongTxtName.Text.LastIndexOf("\\") + 1);//取文件后缀名
             string sql = string.Format("insert song_info values('{0}','{1}','{2}','{3}','{4}','{5}','')",txtSongName.Text, txtSongWord.Text, sum, id, singertypeids,paths);
             try
@@ -97,7 +97,6 @@ namespace KTV程序后台管理
                 if (result == 1)
                 {
                     MessageBox.Show("添加成功！");
-                    File.Copy(txtSongTxtName.Text, KTVUtil.songPath + paths);
                     deleteinfo();
                 }
 
